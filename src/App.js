@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import MyRoutes from "./Components/Routes";
+import { dummyData } from "./Components/DummyData.js";
 
 function App() {
+  useEffect(() => {
+    const itemsString = localStorage.getItem("data");
+    const itemsArray = JSON.parse(itemsString);
+    if (!itemsArray) {
+      localStorage.setItem("data", JSON.stringify(dummyData));
+    }
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <MyRoutes />
     </div>
   );
 }
